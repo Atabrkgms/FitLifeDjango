@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'trainer/css/style.css' %}">
+    <style>
+        .navbar_title {
+            color: white;
+            /* Rengi istediğiniz renk koduyla değiştirin */
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 300px;
+            /* Sidebar genişliğini ayarlayabilirsiniz */
+            background-color: #000;
+            /* Sidebar arka plan rengi */
+            padding-top: 30px;
+            /* İlk satırdan önce bir boşluk bırakmak için */
+            z-index: 900;
+            position: fixed;
+        }
+
+        /* Satırların stilini ayarla */
+        .nav-item {
+            z-index: 1000;
+            border-bottom: 1px solid #fff;
+            /* Satır çizgisi rengi ve stilini ayarlayabilirsiniz */
+        }
+
+        /* İlk satırın üstte bir boşluğu varsa bu boşluğu kapatmak için */
+        .nav-link.active {
+            margin-top: 0 !important;
+        }
+
+        .navbar {
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+        }
+
+        body {
+            padding-top: 56px;
+        }
+
+        /* Ince divider */
+        .divider {
+            border-top: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        /* Sağ üst köşede altı çizili çıkış yap linki */
+
+        .container-fluid {
+            margin-top: 60px;
+        }
+
+        /* styles.css */
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .logout-link {
+            position: fixed;
+            top: 10px;
+            /* Sağ üst köşeye olan dikey mesafe */
+            right: 10px;
+            /* Sağ üst köşeye olan yatay mesafe */
+            text-decoration: none;
+            padding: 10px;
+            /* Arka plan rengi, istediğiniz rengi kullanabilirsiniz */
+            color: #0e0808;
+            /* Yazı rengi, istediğiniz rengi kullanabilirsiniz */
+            border-radius: 5px;
+            /* Kenar yarıçapı */
+        }
+
+        .logout-link:hover {
+            background-color: rgb(148, 146, 153);
+            /* Mouse üzerine gelindiğinde arka plan rengini değiştirme */
+        }
+    </style>
+</head>
+
+<body>
+    {% csrf_token %}
+    <!-- Navbar -->
+    <a href="{% url 'trainer_logout' %}" class="logout-link">Çıkış Yap</a>
+
+   <!-- Sidebar -->
+   <div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
+            <div class="sidebar-sticky">
+                <h1 class="navbar_title">
+                    Antrenör Paneli
+                </h1>
+                <ul class="nav flex-column mt-3">
+                    <li class="nav-item">
+                        <a class="nav-link text-white active" href="{% url 'profil_info' trainer.id %}">
+                            Profil Bilgileri
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'danisan_info' trainer.id %}">
+                            Danışan Bilgileri
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'egzersiz_plani' trainer.id %}">
+                            Egzersiz Planı
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{% url 'beslenme_plani' trainer.id %}">
+                            Beslenme Planı
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="center-container"> <!-- mt-3-->
+                    <h1 class="mb-4">Profil Güncelleme</h1>
+                    <form method="POST" action="{% url 'trainer_guncelle' trainer.id %}">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputTrainerFirstName">Ad</label>
+                                <input type="text" class="form-control" id="inputTrainerFN" name="inputTrainerFirstName"
+                                    required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputTrainerLN">Soyad</label>
+                                <input type="text" class="form-control" id="inputTrainerLN" name="inputTrainerLN"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputTrainerBD">Doğum Tarihi</label>
+                                <input type="date" class="form-control" id="inputTrainerBD" name="inputTrainerBD"
+                                    required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputTrainerGender">Cinsiyet</label>
+                                <select class="form-control" id="inputTrainerGender" name="inputTrainerGender" required>
+                                    <option value="male">Erkek</option>
+                                    <option value="female">Kadın</option>
+                                    <option value="other">Diğer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputTrainerTecrube">Tecrübe</label>
+                                <input type="text" class="form-control" id="inputTrainerTecrube"
+                                    name="inputTrainerTecrube" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputTrainerPhone">Telefon Numarası</label>
+                                <input type="text" class="form-control" id="inputTrainerPhone" placeholder="+90"
+                                    name="inputTrainerPhone" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTrainerEmail">E-posta</label>
+                            <input type="email" class="form-control" id="inputTrainerEmail" name="inputTrainerEmail"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTrainerPassword">Şifre</label>
+                            <input type="password" class="form-control" id="inputTrainerPassword"
+                                name="inputTrainerPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Güncelle</button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS ve jQuery -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

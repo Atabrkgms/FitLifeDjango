@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'account/css/style.css' %}">
+    <title>Kayıt Ol</title>
+</head>
+<body>
+    <div class="center-container">
+        <h1 class="mb-4">Kayıt Ol</h1>
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputFirstName">Ad</label>
+                    <input type="text" class="form-control" id="inputFirstName" name="first_name" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputLastName">Soyad</label>
+                    <input type="text" class="form-control" id="inputLastName" name="last_name" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputBirthDate">Doğum Tarihi</label>
+                    <input type="date" class="form-control" id="inputBirthDate" name="birth_date" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputGender">Cinsiyet</label>
+                    <select class="form-control" id="inputGender" name="gender" required>
+                        <option value="male">Erkek</option>
+                        <option value="female">Kadın</option>
+                        <option value="other">Diğer</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputPhoneNumber">Telefon Numarası</label>
+                    <input type="text" class="form-control" id="inputPhoneNumber" name="phone_number" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputHedef">Hedef</label>
+                    <select class="form-control" id="inputHedef" name="hedef" required>
+                        <option value="kilo_alma">Kilo Alma</option>
+                        <option value="kilo_verme">Kilo Verme</option>
+                        <option value="kilo_koruma">Kilo Koruma</option>
+                        <option value="kas_kazanma">Kas Kazanma</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">E-posta</label>
+                <input type="email" class="form-control" id="inputEmail" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Şifre</label>
+                <input type="password" class="form-control" id="inputPassword" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
+        </form>
+    </div>
+
+    
+    
+    <script src = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

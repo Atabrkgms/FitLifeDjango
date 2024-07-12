@@ -1,0 +1,62 @@
+{% extends 'yonetici/base.html' %}
+
+{% block content %}
+            <!-- Ana İçerik Alanı -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="center-container"> <!-- mt-3-->
+                    <h1 class="mb-4">Danışan Ekleme Formu</h1>
+                        <form method="POST" action="{% url 'client_add' %}">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputClientFN">Ad</label>
+                                    <input type="text" class="form-control" id="inputClientFN" name="inputClientFN" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputClientLN">Soyad</label>
+                                    <input type="text" class="form-control" id="inputClientLN" name="inputClientLN" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputClientBD">Doğum Tarihi</label>
+                                    <input type="date" class="form-control" id="inputClientBD" name="inputClientBD" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputClintGender">Cinsiyet</label>
+                                    <select class="form-control" id="inputClintGender" name="inputClintGender" required>
+                                        <option value="male">Erkek</option>
+                                        <option value="female">Kadın</option>
+                                        <option value="other">Diğer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputClientPhone">Telefon Numarası</label>
+                                    <input type="text" class="form-control" id="inputClientPhone" name="inputClientPhone" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="inputClientHedef">Hedef</label>
+                                    <select class="form-control" id="inputClientHedef" name="inputClientHedef" required>
+                                        <option value="kilo_alma">Kilo Alma</option>
+                                        <option value="kilo_verme">Kilo Verme</option>
+                                        <option value="kilo_koruma">Kilo Koruma</option>
+                                        <option value="kas_kazanma">Kas Kazanma</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputClientEmail">E-posta</label>
+                                <input type="email" class="form-control" id="inputClientEmail" name="inputClientEmail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputClientPassword">Şifre</label>
+                                <input type="password" class="form-control" id="inputClientPassword" name="inputClientPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Ekle</button>
+                        </form>
+                </div>
+            </main>
+            {% endblock %}
+
